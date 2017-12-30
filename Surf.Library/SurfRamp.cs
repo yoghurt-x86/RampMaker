@@ -54,18 +54,20 @@ namespace Surf
                     3,4,5,
                 }
             };
+
+            
         }
         private MeshGeometry3D UnitSurfRamp() {
             /* Initialize Unit SurfRamp */
             return new MeshGeometry3D
             {
                 Positions = new Point3DCollection() {
-                    new Point3D(0,0,0),
-                    new Point3D(1,0,0),
-                    new Point3D(0,-5,-4),
-                    new Point3D(0,-5,4),
-                    new Point3D(1,-5,-4),
-                    new Point3D(1,-5,4)
+                    new Point3D(0, 0, 0),
+                    new Point3D(1, 0, 0),
+                    new Point3D(0,-4,-5),
+                    new Point3D(0, 4,-5),
+                    new Point3D(1,-4,-5),
+                    new Point3D(1, 4,-5)
                 },
                 TriangleIndices = new System.Windows.Media.Int32Collection()
                 {
