@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramps", "Ramps\Ramps.csproj", "{E06A44C2-526B-44D7-8ED6-B4FD62B2E284}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surf.Library", "Surf.Library\Surf.Library.csproj", "{A64B93B8-1074-44CD-823D-8393C2FB30BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{47949623-9D78-4C2E-BEF3-494E27B763C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E06A44C2-526B-44D7-8ED6-B4FD62B2E284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E06A44C2-526B-44D7-8ED6-B4FD62B2E284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E06A44C2-526B-44D7-8ED6-B4FD62B2E284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E06A44C2-526B-44D7-8ED6-B4FD62B2E284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A64B93B8-1074-44CD-823D-8393C2FB30BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A64B93B8-1074-44CD-823D-8393C2FB30BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A64B93B8-1074-44CD-823D-8393C2FB30BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A64B93B8-1074-44CD-823D-8393C2FB30BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47949623-9D78-4C2E-BEF3-494E27B763C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47949623-9D78-4C2E-BEF3-494E27B763C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47949623-9D78-4C2E-BEF3-494E27B763C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47949623-9D78-4C2E-BEF3-494E27B763C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B07BC2A-8D12-4389-902A-9C04D4B726E1}
+	EndGlobalSection
+EndGlobal
