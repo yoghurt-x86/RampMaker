@@ -13,73 +13,49 @@ namespace Surf
     {
 
         public MeshGeometry3D Model { get; private set; }
-        
 
-        public SurfRamp()
+        public SurfRamp(Point3D startPoint, Point3D endPoint, double rampHeight)
         {
-            Model = UnitSurfRamp();
-        }
-        public SurfRamp(Point3D startPoint, Point3D endPoint, Point3D bottomPoint)
-        {
-            var v1 = startPoint.VectorToPoint(bottomPoint);
-            var r = new RotateTransform3D(new AxisAngleRotation3D(startPoint.VectorToPoint(endPoint), 90), bottomPoint);
-            var v2 = r.Transform(v1);
+            var v1 = startPoint.VectorToPoint(endPoint);
+            var Positions = UnitSurfRamp();
 
-            var point3 = new Point3D(bottomPoint.X + (v2.X * 0.8), bottomPoint.Y + (v2.Y * 0.8), bottomPoint.Z + (v2.Z * 0.8));
-            var point4 = new Point3D(bottomPoint.X - (v2.X * 0.8), bottomPoint.Y - (v2.Y * 0.8), bottomPoint.Z - (v2.Z * 0.8));
+            // Create transforms to position Ramp 
+            var transform = new Transform3DGroup();
+            transform.Children.Add(new ScaleTransform3D(startPoint.VectorToPoint(endPoint).Length, rampHeight / 5, rampHeight / 5));                                //Size of ramp
+            transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), -Vector3D.AngleBetween(v1, new Vector3D(v1.X, v1.Y, 0))))); //Rotate up/down on the Y angle
+            transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 0, 1), -Vector3D.AngleBetween(v1, new Vector3D(v1.X, 0, v1.Z))))); //Rotate Left/Right on the Z angle
+            //transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(v1, rotation)));                                                                 //Rotate locally around the direction of ramp
+            transform.Children.Add(new TranslateTransform3D(startPoint.ToVector()));                                                                                //Translate to startPoint
 
-            var point5 = new Point3D(endPoint.X + v1.X + (v2.X * 0.8), endPoint.Y + v1.Y + (v2.Y * 0.8), endPoint.Z + v1.Z + (v2.Z * 0.8));
-            var point6 = new Point3D(endPoint.X + v1.X - (v2.X * 0.8), endPoint.Y + v1.Y - (v2.Y * 0.8), endPoint.Z + v1.Z - (v2.Z * 0.8));
+            transform.Transform(Positions); //Apply Transform
 
-            Model = new MeshGeometry3D
+
+            Model = new MeshGeometry3D //Apply Mesh
             {
-                Positions = new Point3DCollection
-                {
-                    startPoint,
-                    endPoint,
-                    point3,
-                    point4,
-                    point5,
-                    point6
-                },
+                Positions = new Point3DCollection(Positions),
                 TriangleIndices = new System.Windows.Media.Int32Collection()
                 {
-                    0,2,3,
-                    0,3,1,
-                    1,3,5,
-                    1,4,0,
-                    0,4,2,
-                    1,5,4,
-                    3,2,4,
-                    3,4,5,
+                    3,2,0,
+                    1,3,0,
+                    5,3,1,
+                    0,4,1,
+                    2,4,0,
+                    4,5,1,
+                    4,2,3,
+                    5,4,3,
                 }
             };
-
-            
         }
-        private MeshGeometry3D UnitSurfRamp() {
+
+        private Point3D[] UnitSurfRamp() {
             /* Initialize Unit SurfRamp */
-            return new MeshGeometry3D
-            {
-                Positions = new Point3DCollection() {
-                    new Point3D(0, 0, 0),
-                    new Point3D(1, 0, 0),
-                    new Point3D(0,-4,-5),
-                    new Point3D(0, 4,-5),
-                    new Point3D(1,-4,-5),
-                    new Point3D(1, 4,-5)
-                },
-                TriangleIndices = new System.Windows.Media.Int32Collection()
-                {
-                    0,2,3,
-                    0,3,1,
-                    1,3,5,
-                    1,4,0,
-                    0,4,2,
-                    1,5,4,
-                    3,2,4,
-                    3,4,5,
-                }
+            return new Point3D[] {
+                new Point3D(0, 0, 5),
+                new Point3D(1, 0, 5),
+                new Point3D(0,-4, 0),
+                new Point3D(0, 4, 0),
+                new Point3D(1,-4, 0),
+                new Point3D(1, 4, 0)
             };
         }
     }

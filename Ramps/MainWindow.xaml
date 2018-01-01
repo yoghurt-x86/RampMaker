@@ -12,6 +12,7 @@
             <HelixToolkit:HelixViewport3D ClipToBounds="True" ZoomExtentsWhenLoaded="True">
                 <HelixToolkit:SunLight/>
                 <ModelVisual3D Content="{Binding Ramps}"/>
+                <HelixToolkit:GridLinesVisual3D Width="512" Length="512" MinorDistance="64" MajorDistance="64" Thickness="0.1"/>
             </HelixToolkit:HelixViewport3D>
         </DockPanel>
     </Grid>
