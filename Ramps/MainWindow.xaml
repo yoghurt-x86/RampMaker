@@ -8,12 +8,67 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="512" Width="1024">
     <Grid>
-        <DockPanel>
-            <HelixToolkit:HelixViewport3D ClipToBounds="True" ZoomExtentsWhenLoaded="True">
-                <HelixToolkit:SunLight/>
-                <ModelVisual3D Content="{Binding Ramps}"/>
-                <HelixToolkit:GridLinesVisual3D Width="512" Length="512" MinorDistance="64" MajorDistance="64" Thickness="0.1"/>
-            </HelixToolkit:HelixViewport3D>
-        </DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <HelixToolkit:HelixViewport3D ClipToBounds="True" ZoomExtentsWhenLoaded="True">
+            <HelixToolkit:SunLight/>
+            <ModelVisual3D Content="{Binding Ramps}"/>
+            <HelixToolkit:GridLinesVisual3D Width="512" Length="512" MinorDistance="64" MajorDistance="64" Thickness="0.1"/>
+        </HelixToolkit:HelixViewport3D>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Bezier"></Label>
+            <Label Content="p0 X:" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="p0X" Margin="5"/>
+            <Label Content="p0 Y:" Grid.Row="1" Grid.Column="2"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Name="p0Y" Margin="5"/>
+            <Label Content="p0 Z:" Grid.Row="1" Grid.Column="4"/>
+            <TextBox Grid.Row="1" Grid.Column="5" Name="p0Z" Margin="5"/>
+
+            <Label Content="p1 X:" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="p1X" Margin="5"/>
+            <Label Content="p1 Y:" Grid.Row="2" Grid.Column="2"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Name="p1Y" Margin="5"/>
+            <Label Content="p1 Z:" Grid.Row="2" Grid.Column="4"/>
+            <TextBox Grid.Row="2" Grid.Column="5" Name="p1Z" Margin="5"/>
+
+            <Label Content="p2 X:" Grid.Row="3" Grid.Column="0"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="p2X" Margin="5"/>
+            <Label Content="p2 Y:" Grid.Row="3" Grid.Column="2"/>
+            <TextBox Grid.Row="3" Grid.Column="3" Name="p2Y" Margin="5"/>
+            <Label Content="p2 Z:" Grid.Row="3" Grid.Column="4"/>
+            <TextBox Grid.Row="3" Grid.Column="5" Name="p2Z" Margin="5"/>
+
+            <Label Content="p3 X:" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Name="p3X" Margin="5"/>
+            <Label Content="p3 Y:" Grid.Row="4" Grid.Column="2"/>
+            <TextBox Grid.Row="4" Grid.Column="3" Name="p3Y" Margin="5"/>
+            <Label Content="p3 Z:" Grid.Row="4" Grid.Column="4"/>
+            <TextBox Grid.Row="4" Grid.Column="5" Name="p3Z" Margin="5"/>
+
+            <Label Content="Segments:" Grid.Row="5" Grid.Column="0"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Name="Segments" Margin="5"/>
+
+            <Button Grid.Row="6" Content="OK" Margin="5" Click="Button_Click"/>
+        </Grid>
     </Grid>
 </Window>
