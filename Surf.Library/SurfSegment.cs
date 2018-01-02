@@ -4,28 +4,28 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media.Composition;
 using System.Windows.Media.Media3D;
-using MS.Internal.Media3D;
-using Surf.Library;
 
-namespace Surf
+namespace Surf.Library
 {
-    public class SurfRamp
+    public class SurfSegment
     {
+        public static Vector3D Z_AXIS = new Vector3D(0,0,1);
+        public static Vector3D Y_AXIS = new Vector3D(0,1,0);
 
         public MeshGeometry3D Model { get; private set; }
 
-        public SurfRamp(Point3D startPoint, Point3D endPoint, double rampHeight)
+        public SurfSegment(Point3D startPoint, Point3D endPoint, double rampHeight)
         {
             var v1 = startPoint.VectorToPoint(endPoint);
             var Positions = UnitSurfRamp();
 
             // Create transforms to position Ramp 
             var transform = new Transform3DGroup();
-            transform.Children.Add(new ScaleTransform3D(startPoint.VectorToPoint(endPoint).Length, rampHeight / 5, rampHeight / 5));                                //Size of ramp
-            transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), -Vector3D.AngleBetween(v1, new Vector3D(v1.X, v1.Y, 0))))); //Rotate up/down on the Y angle
-            transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 0, 1), -Vector3D.AngleBetween(v1, new Vector3D(v1.X, 0, v1.Z))))); //Rotate Left/Right on the Z angle
-            //transform.Children.Add(new RotateTransform3D(new AxisAngleRotation3D(v1, rotation)));                                                                 //Rotate locally around the direction of ramp
-            transform.Children.Add(new TranslateTransform3D(startPoint.ToVector()));                                                                                //Translate to startPoint
+            transform.Children.Add(new ScaleTransform3D(startPoint.VectorToPoint(endPoint).Length, rampHeight / 5, rampHeight / 5)); //Size of ramp
+
+            //Rotate ramps!!!
+
+            transform.Children.Add(new TranslateTransform3D(startPoint.ToVector())); //Translate to startPoint
 
             transform.Transform(Positions); //Apply Transform
 

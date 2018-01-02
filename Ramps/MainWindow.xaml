@@ -6,7 +6,7 @@
         xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
         xmlns:local="clr-namespace:Ramps"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="512" Width="1024">
     <Grid>
         <DockPanel>
             <HelixToolkit:HelixViewport3D ClipToBounds="True" ZoomExtentsWhenLoaded="True">

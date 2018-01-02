@@ -24,5 +24,6 @@ namespace Surf.Library
         {
             return new Vector3D(point.X, point.Y, point.Z);
         }
+
     }
 }
