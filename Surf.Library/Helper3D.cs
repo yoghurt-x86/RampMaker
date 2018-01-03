@@ -33,5 +33,19 @@ namespace Surf.Library
             return new Vector3D(n.X * Multiply, n.Y * Multiply, n.Z * Multiply );
         }
 
+        public static Vector3D ToLength(this Vector3D a, double length)
+        {
+            var k = length / a.Length;
+            return new Vector3D(a.X * k, a.Y * k, a.Z * k);
+        }
+        public static Vector3D Cross(this Vector3D u, Vector3D v)
+        {
+            return new Vector3D(
+                (u.Y * v.Z) - (u.Z * v.Y),
+                (u.Z * v.X) - (u.X * v.Z),
+                (u.X * v.Y) - (u.Y * v.X)
+                );
+        }
+
     }
 }

@@ -9,8 +9,8 @@ namespace Surf.Library
 {
     public class SurfSegment
     {
-        public static Vector3D Z_AXIS = new Vector3D(0,0,1);
-        public static Vector3D Y_AXIS = new Vector3D(0,1,0);
+        public static Vector3D Z_AXIS = new Vector3D(0,0,100);
+        public static Vector3D Y_AXIS = new Vector3D(0,100,0);
 
         public MeshGeometry3D Model { get; private set; }
         public Point3D StartPoint { get; private set; }
@@ -70,15 +70,21 @@ namespace Surf.Library
 
         public void LinkTo(SurfSegment seg)
         {
+            if (EndPoint.X != seg.StartPoint.X && EndPoint.Y != seg.StartPoint.Y && EndPoint.Z != seg.StartPoint.Z)
+            {
+                throw new ArgumentException("The ramp does not share endpoint/startpoint");
+            }
             var cross = Vector3D.CrossProduct( GetDirection(), seg.GetDirection() );
             var dot =   Vector3D.DotProduct(   GetDirection(), seg.GetDirection() );
 
-            if (dot.ApproximateEquals(0)) {
+            if (dot.ApproximateEquals(0))
+            {
                 throw new NotImplementedException("Ramp is Straight on");
             }
-            else if (cross.Z.ApproximateEquals(0)) { //vertical turn (up/down)
-                
-                if(EndPoint.Z < seg.EndPoint.Z) //up
+            else if (cross.Z.ApproximateEquals(0))
+            { //vertical turn (up/down)
+
+                if (VerticalDirection(seg)) //up
                 {
                     //do nothing actually
                 }
@@ -91,7 +97,7 @@ namespace Surf.Library
                     Vector3D v;
                     Vector3D n2;
                     Vector3D n3;
-               
+
                     v = StartPoint.VectorToPoint(EndPoint);
                     n2 = Vector3D.CrossProduct(Z_AXIS, v);
                     n3 = Vector3D.CrossProduct(v, n2);
@@ -103,8 +109,6 @@ namespace Surf.Library
                     n3.Normalize();
                     var h2 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
 
-
-                    //n.Normalize();
                     var V1 = StartPoint.VectorToPoint(seg.EndPoint);
                     var V2 = new Vector3D(h2.X - h1.X, h2.Y - h1.Y, h2.Z - h1.Z);
 
@@ -119,14 +123,21 @@ namespace Surf.Library
 
                     //assign
                     this.Model.Positions[1] = sharedPoint;
-                     seg.Model.Positions[0] = sharedPoint;
+                    seg.Model.Positions[0] = sharedPoint;
                 }
-                
+
             }
             else if (cross.X.ApproximateEquals(0) && cross.Y.ApproximateEquals(0))
             {
                 throw new NotImplementedException("Horizontal right/left turn link");
             }
+        }
+
+        private bool VerticalDirection(SurfSegment seg)
+        {
+            var n = Vector3D.CrossProduct(this.GetDirection(), seg.GetDirection());
+            var k = Vector3D.CrossProduct(this.GetDirection(), n);
+            return k.Z < 0;
         }
     }
 }
