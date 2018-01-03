@@ -9,6 +9,8 @@ namespace Surf.Library
 {
     public static class Helper3D
     {
+        public static double MAX_DIF_ALLOWED = Double.Epsilon;
+
         public static Vector3D VectorToPoint(this Point3D start, Point3D end)
         {
             return new Vector3D(end.X - start.X, end.Y - start.Y, end.Z - start.Z);
@@ -20,9 +22,9 @@ namespace Surf.Library
             vector.Z *= scaleAmount;
             return vector;
         }
-        public static Vector3D ToVector(this Point3D point)
+        public static bool ApproximateEquals(this double a, double b)
         {
-            return new Vector3D(point.X, point.Y, point.Z);
+            return (Math.Abs(a - b) < MAX_DIF_ALLOWED);
         }
 
     }
