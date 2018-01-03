@@ -27,5 +27,11 @@ namespace Surf.Library
             return (Math.Abs(a - b) < MAX_DIF_ALLOWED);
         }
 
+        public static Vector3D ProjectedOn(this Vector3D a, Vector3D n)
+        {
+            var Multiply = Vector3D.DotProduct(a, n) / Math.Pow(n.Length, 2);
+            return new Vector3D(n.X * Multiply, n.Y * Multiply, n.Z * Multiply );
+        }
+
     }
 }

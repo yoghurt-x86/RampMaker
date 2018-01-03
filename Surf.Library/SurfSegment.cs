@@ -15,11 +15,13 @@ namespace Surf.Library
         public MeshGeometry3D Model { get; private set; }
         public Point3D StartPoint { get; private set; }
         public Point3D EndPoint { get; private set; }
+        public double Height { get; private set; }
 
         public SurfSegment(Point3D startPoint, Point3D endPoint, double rampHeight)
         {
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
+            this.Height = rampHeight;
 
             var v1 = startPoint.VectorToPoint(endPoint);
             var n2 = Vector3D.CrossProduct(Z_AXIS, v1);
@@ -83,8 +85,41 @@ namespace Surf.Library
                 else //down
                 {
                     //Math incoming
+                    Point3D sharedPoint = new Point3D();
 
-                    throw new NotImplementedException("Vertical down turn");
+                    //Calculate
+                    Vector3D v;
+                    Vector3D n2;
+                    Vector3D n3;
+               
+                    v = StartPoint.VectorToPoint(EndPoint);
+                    n2 = Vector3D.CrossProduct(Z_AXIS, v);
+                    n3 = Vector3D.CrossProduct(v, n2);
+                    n3.Normalize();
+                    var h1 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
+                    v = seg.StartPoint.VectorToPoint(seg.EndPoint);
+                    n2 = Vector3D.CrossProduct(Z_AXIS, v);
+                    n3 = Vector3D.CrossProduct(v, n2);
+                    n3.Normalize();
+                    var h2 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
+
+
+                    //n.Normalize();
+                    var V1 = StartPoint.VectorToPoint(seg.EndPoint);
+                    var V2 = new Vector3D(h2.X - h1.X, h2.Y - h1.Y, h2.Z - h1.Z);
+
+                    var v1 = StartPoint.VectorToPoint(EndPoint);
+                    var v2 = seg.StartPoint.VectorToPoint(seg.EndPoint);
+
+                    var k = V2.Length / V1.Length;
+
+                    sharedPoint.X = EndPoint.X + h1.X + (v1.X * k);
+                    sharedPoint.Y = EndPoint.Y + h1.Y + (v1.Y * k);
+                    sharedPoint.Z = EndPoint.Z + h1.Z + (v1.Z * k);
+
+                    //assign
+                    this.Model.Positions[1] = sharedPoint;
+                     seg.Model.Positions[0] = sharedPoint;
                 }
                 
             }
