@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <HelixToolkit:HelixViewport3D ClipToBounds="True" ZoomExtentsWhenLoaded="True">
             <HelixToolkit:SunLight/>
-            <ModelVisual3D Content="{Binding Ramps}"/>
+            <ModelVisual3D Content="{Binding CurrentRamp}"/>
             <HelixToolkit:GridLinesVisual3D Width="512" Length="512" MinorDistance="64" MajorDistance="64" Thickness="0.1"/>
         </HelixToolkit:HelixViewport3D>
         <StackPanel Grid.Column="1">
@@ -22,83 +22,83 @@
                 <Label FontSize="10">p0</Label>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
-                    <TextBox Text="{Binding ElementName=p0XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0XValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P0X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P0X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
-                    <TextBox Text="{Binding ElementName=p0YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0YValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P0Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P0Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
-                    <TextBox Text="{Binding ElementName=p0ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0ZValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P0Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P0Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
                 <Label FontSize="10">p1</Label>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
-                    <TextBox Text="{Binding ElementName=p1XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1XValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P1X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P1X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
-                    <TextBox Text="{Binding ElementName=p1YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1YValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P1Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P1Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
-                    <TextBox Text="{Binding ElementName=p1ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1ZValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P1Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P1Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
                 <Label FontSize="10">p2</Label>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
-                    <TextBox Text="{Binding ElementName=p2XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2XValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P2X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P2X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
-                    <TextBox Text="{Binding ElementName=p2YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2YValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P2Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P2Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
-                    <TextBox Text="{Binding ElementName=p2ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2ZValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P2Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P2Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
                 <Label FontSize="10">p3</Label>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
-                    <TextBox Text="{Binding ElementName=p3XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3XValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P3X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P3X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
-                    <TextBox Text="{Binding ElementName=p3YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3YValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P3Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P3Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
-                    <TextBox Text="{Binding ElementName=p3ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3ZValue" ValueChanged="Button_Click"/>
+                    <TextBox Text="{Binding BezierPoints.P3Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Value="{Binding BezierPoints.P3Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3ZValue"/>
                 </DockPanel>
             </StackPanel>
             <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                 <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Segments:</Label>
-                <TextBox Text="{Binding ElementName=Segments, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                <Slider Minimum="1" Maximum="128" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Segments" ValueChanged="Button_Click"/>
+                <TextBox Text="{Binding BezierPoints.Segments}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                <Slider Value="{Binding BezierPoints.Segments}" Minimum="1" Maximum="128" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Segments"/>
             </DockPanel>
             <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                 <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Height:</Label>
-                <TextBox Text="{Binding ElementName=Height, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                <Slider Minimum="1" Maximum="2048" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Height" ValueChanged="Button_Click"/>
+                <TextBox Text="{Binding BezierPoints.Height}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                <Slider Value="{Binding BezierPoints.Height}" Minimum="1" Maximum="2048" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Height"/>
             </DockPanel>
         </StackPanel>
     </Grid>

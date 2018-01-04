@@ -45,5 +45,28 @@ namespace Ramps.ViewModels
         private double _P3Z;
         public double P3Z { get => _P3Z; set { if (value != _P3Z) { _P3Z = value; OnPropertyChanged(); } } }
 
-    }
-}
+        private double _height;
+        public double Height { get => _height; set { if (value != _height) { _height = value; OnPropertyChanged(); } } }
+
+        private int _segments;
+        public int Segments { get => _segments; set { if (value != _segments) { _segments = value; OnPropertyChanged(); } } }
+
+        public BezierPointsViewModel()
+        {
+            P0X = 0;
+            P0Y = 0;
+            P0Z = 0;
+            P1X = 256;
+            P1Y = 0;
+            P1Z = 0;
+            P2X = 384;
+            P2Y = 0;
+            P2Z = 128;
+            P3X = 512;
+            P3Y = 0;
+            P3Z = 128;
+            Height = 384;
+            Segments = 5;
+        }
+    }      
+}           

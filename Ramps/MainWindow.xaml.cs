@@ -29,21 +29,5 @@ namespace Ramps
             _vm = new MainViewModel();
             DataContext = _vm;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var p0 = new Point3D(p0XValue.Value, p0YValue.Value, p0ZValue.Value);
-                var p1 = new Point3D(p1XValue.Value, p1YValue.Value, p1ZValue.Value);
-                var p2 = new Point3D(p2XValue.Value, p2YValue.Value, p2ZValue.Value);
-                var p3 = new Point3D(p3XValue.Value, p3YValue.Value, p3ZValue.Value);
-                _vm.updateBezier(p0, p1, p2, p3, (int)Segments.Value, Height.Value);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            
-        }
     }
 }
