@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media.Composition;
 using System.Windows.Media.Media3D;
+using MS.Internal.Media3D;
 
 namespace Surf.Library
 {
@@ -139,5 +140,6 @@ namespace Surf.Library
             var k = Vector3D.CrossProduct(this.GetDirection(), n);
             return k.Z < 0;
         }
+
     }
 }

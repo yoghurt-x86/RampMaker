@@ -6,7 +6,7 @@
         xmlns:HelixToolkit="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
         xmlns:local="clr-namespace:Ramps"
         mc:Ignorable="d"
-        Title="MainWindow" Height="512" Width="1024">
+        Title="MainWindow" Height="720" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,58 +17,89 @@
             <ModelVisual3D Content="{Binding Ramps}"/>
             <HelixToolkit:GridLinesVisual3D Width="512" Length="512" MinorDistance="64" MajorDistance="64" Thickness="0.1"/>
         </HelixToolkit:HelixViewport3D>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Bezier"></Label>
-            <Label Content="p0 X:" Grid.Row="1" Grid.Column="0"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Name="p0X" Margin="5"/>
-            <Label Content="p0 Y:" Grid.Row="1" Grid.Column="2"/>
-            <TextBox Grid.Row="1" Grid.Column="3" Name="p0Y" Margin="5"/>
-            <Label Content="p0 Z:" Grid.Row="1" Grid.Column="4"/>
-            <TextBox Grid.Row="1" Grid.Column="5" Name="p0Z" Margin="5"/>
-
-            <Label Content="p1 X:" Grid.Row="2" Grid.Column="0"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="p1X" Margin="5"/>
-            <Label Content="p1 Y:" Grid.Row="2" Grid.Column="2"/>
-            <TextBox Grid.Row="2" Grid.Column="3" Name="p1Y" Margin="5"/>
-            <Label Content="p1 Z:" Grid.Row="2" Grid.Column="4"/>
-            <TextBox Grid.Row="2" Grid.Column="5" Name="p1Z" Margin="5"/>
-
-            <Label Content="p2 X:" Grid.Row="3" Grid.Column="0"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="p2X" Margin="5"/>
-            <Label Content="p2 Y:" Grid.Row="3" Grid.Column="2"/>
-            <TextBox Grid.Row="3" Grid.Column="3" Name="p2Y" Margin="5"/>
-            <Label Content="p2 Z:" Grid.Row="3" Grid.Column="4"/>
-            <TextBox Grid.Row="3" Grid.Column="5" Name="p2Z" Margin="5"/>
-
-            <Label Content="p3 X:" Grid.Row="4" Grid.Column="0"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="p3X" Margin="5"/>
-            <Label Content="p3 Y:" Grid.Row="4" Grid.Column="2"/>
-            <TextBox Grid.Row="4" Grid.Column="3" Name="p3Y" Margin="5"/>
-            <Label Content="p3 Z:" Grid.Row="4" Grid.Column="4"/>
-            <TextBox Grid.Row="4" Grid.Column="5" Name="p3Z" Margin="5"/>
-
-            <Label Content="Segments:" Grid.Row="5" Grid.Column="0"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Name="Segments" Margin="5"/>
-
-            <Button Grid.Row="6" Content="OK" Margin="5" Click="Button_Click"/>
-        </Grid>
+        <StackPanel Grid.Column="1">
+            <StackPanel>
+                <Label FontSize="10">p0</Label>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
+                    <TextBox Text="{Binding ElementName=p0XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0XValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
+                    <TextBox Text="{Binding ElementName=p0YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0YValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
+                    <TextBox Text="{Binding ElementName=p0ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0ZValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel>
+                <Label FontSize="10">p1</Label>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
+                    <TextBox Text="{Binding ElementName=p1XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1XValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
+                    <TextBox Text="{Binding ElementName=p1YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1YValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
+                    <TextBox Text="{Binding ElementName=p1ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1ZValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel>
+                <Label FontSize="10">p2</Label>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
+                    <TextBox Text="{Binding ElementName=p2XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2XValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
+                    <TextBox Text="{Binding ElementName=p2YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2YValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
+                    <TextBox Text="{Binding ElementName=p2ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2ZValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel>
+                <Label FontSize="10">p3</Label>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
+                    <TextBox Text="{Binding ElementName=p3XValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3XValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
+                    <TextBox Text="{Binding ElementName=p3YValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3YValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+                <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                    <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
+                    <TextBox Text="{Binding ElementName=p3ZValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3ZValue" ValueChanged="Button_Click"/>
+                </DockPanel>
+            </StackPanel>
+            <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Segments:</Label>
+                <TextBox Text="{Binding ElementName=Segments, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                <Slider Minimum="1" Maximum="128" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Segments" ValueChanged="Button_Click"/>
+            </DockPanel>
+            <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
+                <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Height:</Label>
+                <TextBox Text="{Binding ElementName=Height, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                <Slider Minimum="1" Maximum="2048" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Height" ValueChanged="Button_Click"/>
+            </DockPanel>
+        </StackPanel>
     </Grid>
 </Window>

@@ -14,10 +14,9 @@ using System.Diagnostics;
 
 namespace Ramps.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
-        public Model3DGroup Ramps { get; set; }
-        public LinesVisual3D Lines { get; set; }
+        public Model3DGroup Ramps { get; private set; }
 
         public MainViewModel()
         {
@@ -28,71 +27,23 @@ namespace Ramps.ViewModels
             var point2 = new Point3D(30, 0, 0);
             var point3 = new Point3D(40, 0, 20);
             var point4 = new Point3D(50, 0, 20);
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-                                                            
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(0, 30, 0);                 
-            point3 = new Point3D(0, 40, 20);                
-            point4 = new Point3D(0, 50, 20);                 
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-                                                            
-                                                            
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(30, -30, 0);               
-            point3 = new Point3D(40, -40, 20);              
-            point4 = new Point3D(50, -50, 20);               
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(30, 30, 0);                
-            point3 = new Point3D(40, 40, 20);               
-            point4 = new Point3D(50, 50, 20);               
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(-30, 30, 0);               
-            point3 = new Point3D(-40, 40, 20);              
-            point4 = new Point3D(-50, 50, 20);              
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(-30, -30, 0);              
-            point3 = new Point3D(-40, -40, 20);             
-            point4 = new Point3D(-50, -50, 20);             
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, 0);                  
-            point2 = new Point3D(30, -30, -0);              
-            point3 = new Point3D(40, -40, -20);             
-            point4 = new Point3D(50, -50, -20);             
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, -0);                 
-            point2 = new Point3D(30, 30, -0);               
-            point3 = new Point3D(40, 40, -20);              
-            point4 = new Point3D(50, 50, -20);              
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, -0);                 
-            point2 = new Point3D(-30, 30, -0);              
-            point3 = new Point3D(-40, 40, -20);             
-            point4 = new Point3D(-50, 50, -20);             
-            AddCurvedBezier(point1, point2, point3, point4, 50);
-            point1 = new Point3D(0, 0, -0);                 
-            point2 = new Point3D(-30, -30, -0);             
-            point3 = new Point3D(-40, -40, -20);            
-            point4 = new Point3D(-50, -50, -20);            
-            AddCurvedBezier(point1, point2, point3, point4, 50);
+            AddCurvedBezier(point1, point2, point3, point4, 50, 10);
 
         }
 
-        internal void updateBezier(Point3D p0, Point3D p1, Point3D p2, Point3D p3, int segments)
+        internal void updateBezier(Point3D p0, Point3D p1, Point3D p2, Point3D p3, int segments, double Height)
         {
             Ramps.Children.Clear();
-            AddCurvedBezier(p0, p1, p2, p3, segments);
+            AddCurvedBezier(p0, p1, p2, p3, segments, Height);
         }
 
-        private void AddCurvedBezier(Point3D point1, Point3D point2, Point3D point3, Point3D point4, int segments)
+        private void AddCurvedBezier(Point3D point1, Point3D point2, Point3D point3, Point3D point4, int segments, double Height)
         {
             var points = new Bezier3D(point1, point2, point3, point4).GetPoints(segments).ToArray();
             SurfSegment[] ramps = new SurfSegment[points.Length - 1];
             for (int i = 1; i < points.Length; i++)
             {
-                ramps[i - 1] = new SurfSegment(points[i - 1], points[i], 10);
+                ramps[i - 1] = new SurfSegment(points[i - 1], points[i], Height);
                 Console.WriteLine("Points" + points[i - 1] + " , " + points[i]);
             }
             for (int i = 0; i < ramps.Length - 1; i++)

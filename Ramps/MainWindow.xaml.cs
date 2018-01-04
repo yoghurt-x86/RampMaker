@@ -31,11 +31,19 @@ namespace Ramps
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var p0 = new Point3D(Double.Parse(p0X.Text), Double.Parse(p0Y.Text), Double.Parse(p0Z.Text));
-            var p1 = new Point3D(Double.Parse(p1X.Text), Double.Parse(p1Y.Text), Double.Parse(p1Z.Text));
-            var p2 = new Point3D(Double.Parse(p2X.Text), Double.Parse(p2Y.Text), Double.Parse(p2Z.Text));
-            var p3 = new Point3D(Double.Parse(p3X.Text), Double.Parse(p3Y.Text), Double.Parse(p3Z.Text));
-            _vm.updateBezier(p0, p1, p2, p3, Int32.Parse(Segments.Text));
+            try
+            {
+                var p0 = new Point3D(p0XValue.Value, p0YValue.Value, p0ZValue.Value);
+                var p1 = new Point3D(p1XValue.Value, p1YValue.Value, p1ZValue.Value);
+                var p2 = new Point3D(p2XValue.Value, p2YValue.Value, p2ZValue.Value);
+                var p3 = new Point3D(p3XValue.Value, p3YValue.Value, p3ZValue.Value);
+                _vm.updateBezier(p0, p1, p2, p3, (int)Segments.Value, Height.Value);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
         }
     }
 }
