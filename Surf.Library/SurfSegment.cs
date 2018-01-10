@@ -71,75 +71,127 @@ namespace Surf.Library
 
         public void LinkTo(SurfSegment seg)
         {
-            if (EndPoint.X != seg.StartPoint.X && EndPoint.Y != seg.StartPoint.Y && EndPoint.Z != seg.StartPoint.Z)
+            if (EndPoint.X != seg.StartPoint.X ||
+                EndPoint.Y != seg.StartPoint.Y ||
+                EndPoint.Z != seg.StartPoint.Z ||
+                Height != seg.Height )
             {
-                throw new ArgumentException("The ramp does not share endpoint/startpoint");
+                throw new ArgumentException("The ramp does not share endpoint/startpoint or height");
             }
+
             var cross = Vector3D.CrossProduct( GetDirection(), seg.GetDirection() );
             var dot =   Vector3D.DotProduct(   GetDirection(), seg.GetDirection() );
+            var theta = dot / (GetDirection().Length * seg.GetDirection().Length);
 
-            if (dot.ApproximateEquals(0))
+            if (theta.ApproximateEquals(1))
             {
                 throw new NotImplementedException("Ramp is Straight on");
             }
-            else if (cross.Z.ApproximateEquals(0))
-            { //vertical turn (up/down)
-
-                if (VerticalDirection(seg)) //up
-                {
-                    //do nothing actually
-                }
-                else //down
-                {
-                    //Math incoming
-                    Point3D sharedPoint = new Point3D();
-
-                    //Calculate
-                    Vector3D v;
-                    Vector3D n2;
-                    Vector3D n3;
-
-                    v = StartPoint.VectorToPoint(EndPoint);
-                    n2 = Vector3D.CrossProduct(Z_AXIS, v);
-                    n3 = Vector3D.CrossProduct(v, n2);
-                    n3.Normalize();
-                    var h1 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
-                    v = seg.StartPoint.VectorToPoint(seg.EndPoint);
-                    n2 = Vector3D.CrossProduct(Z_AXIS, v);
-                    n3 = Vector3D.CrossProduct(v, n2);
-                    n3.Normalize();
-                    var h2 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
-
-                    var V1 = StartPoint.VectorToPoint(seg.EndPoint);
-                    var V2 = new Vector3D(h2.X - h1.X, h2.Y - h1.Y, h2.Z - h1.Z);
-
-                    var v1 = StartPoint.VectorToPoint(EndPoint);
-                    var v2 = seg.StartPoint.VectorToPoint(seg.EndPoint);
-
-                    var k = V2.Length / V1.Length;
-
-                    sharedPoint.X = EndPoint.X + h1.X + (v1.X * k);
-                    sharedPoint.Y = EndPoint.Y + h1.Y + (v1.Y * k);
-                    sharedPoint.Z = EndPoint.Z + h1.Z + (v1.Z * k);
-
-                    //assign
-                    this.Model.Positions[1] = sharedPoint;
-                    seg.Model.Positions[0] = sharedPoint;
-                }
-
+            else if (cross.Z.ApproximateEquals(0)) //vertical turn (up/down)
+            { 
+                LinkVerticallyTo(seg);
             }
-            else if (cross.X.ApproximateEquals(0) && cross.Y.ApproximateEquals(0))
+            else if (cross.X.ApproximateEquals(0) && cross.Y.ApproximateEquals(0)) //Horizontal flat turn?
             {
-                throw new NotImplementedException("Horizontal right/left turn link");
+                LinkHorizontallyTo(seg);
             }
         }
 
-        private bool VerticalDirection(SurfSegment seg)
+        private void LinkVerticallyTo(SurfSegment seg)
+        {
+            if (IsUpwardsTurn(seg)) //up
+            {
+                //do nothing actually
+            }
+            else //down
+            {
+                //Math incoming
+                Point3D sharedPoint = new Point3D();
+
+                //Calculate
+                Vector3D v;
+                Vector3D n2;
+                Vector3D n3;
+
+                v = StartPoint.VectorToPoint(EndPoint);
+                n2 = Vector3D.CrossProduct(Z_AXIS, v);
+                n3 = Vector3D.CrossProduct(v, n2);
+                n3.Normalize();
+                var h1 = new Vector3D(n3.X * Height, n3.Y * Height, n3.Z * Height);
+                v = seg.StartPoint.VectorToPoint(seg.EndPoint);
+                n2 = Vector3D.CrossProduct(Z_AXIS, v);
+                n3 = Vector3D.CrossProduct(v, n2);
+                n3.Normalize();
+                var h2 = new Vector3D(n3.X * seg.Height, n3.Y * seg.Height, n3.Z * Height);
+
+                var V1 = StartPoint.VectorToPoint(seg.EndPoint);
+                var V2 = new Vector3D(h2.X - h1.X, h2.Y - h1.Y, h2.Z - h1.Z);
+
+                var v1 = StartPoint.VectorToPoint(EndPoint);
+                var v2 = seg.StartPoint.VectorToPoint(seg.EndPoint);
+
+                var k = V2.Length / V1.Length;
+
+                sharedPoint.X = EndPoint.X + h1.X + (v1.X * k);
+                sharedPoint.Y = EndPoint.Y + h1.Y + (v1.Y * k);
+                sharedPoint.Z = EndPoint.Z + h1.Z + (v1.Z * k);
+
+                //assign
+                this.Model.Positions[1] = sharedPoint;
+                seg.Model.Positions[0] = sharedPoint;
+            }
+        }
+
+        private void LinkHorizontallyTo(SurfSegment seg)
+        {
+            //Math incoming
+            Point3D sharedPoint = new Point3D();
+
+            Vector3D v1;
+            Vector3D v2;
+
+            v1 = StartPoint.VectorToPoint(EndPoint);
+            var w1 = Vector3D.CrossProduct(v1, Z_AXIS).ToLength(Height * 0.8);
+
+            v2 = seg.StartPoint.VectorToPoint(seg.EndPoint);
+            var w2 = Vector3D.CrossProduct(v2, Z_AXIS).ToLength(Height * 0.8);
+
+            bool isLeft = Vector3D.CrossProduct(v1, v2).Z > 0;
+
+            if (!isLeft) // If the turn is a left turn
+            {
+                w1.Negate();
+                w2.Negate();
+            }
+
+            var V1 = StartPoint.VectorToPoint(seg.EndPoint);
+            var V2 = new Vector3D(w2.X - w1.X, w2.Y - w1.Y, w2.Z - w1.Z);
+
+            var k = V2.Length / V1.Length;
+
+            sharedPoint.X = EndPoint.X + w1.X + (v1.X * k);
+            sharedPoint.Y = EndPoint.Y + w1.Y + (v1.Y * k);
+            sharedPoint.Z = EndPoint.Z + w1.Z + (v1.Z * k);
+
+
+            //assign
+            if (isLeft)
+            {
+                this.Model.Positions[5] = sharedPoint;
+                seg.Model.Positions[3] = sharedPoint;
+            }
+            else
+            {
+                this.Model.Positions[4] = sharedPoint;
+                seg.Model.Positions[2] = sharedPoint;
+            }
+        }
+
+        private bool IsUpwardsTurn(SurfSegment seg)
         {
             var n = Vector3D.CrossProduct(this.GetDirection(), seg.GetDirection());
             var k = Vector3D.CrossProduct(this.GetDirection(), n);
             return k.Z < 0;
         }
-
     }
 }

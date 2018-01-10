@@ -33,7 +33,7 @@ namespace Ramps.ViewModels
             BezierPoints.PropertyChanged += UpdatecurrentRamp;
             Ramps = new Model3DGroup();
             CurrentRamp = new Model3DGroup();
-
+            UpdatecurrentRamp(null, null);
         }
 
         private void UpdatecurrentRamp(object sender, PropertyChangedEventArgs e)
@@ -64,6 +64,7 @@ namespace Ramps.ViewModels
                 return;
             }
         }
+        
 
         private void AddCurvedBezier(Bezier3D bezier, int segments, double Height)
         {

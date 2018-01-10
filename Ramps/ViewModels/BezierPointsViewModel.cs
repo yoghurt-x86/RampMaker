@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ramps.ViewModels
 {
     public class BezierPointsViewModel : BaseViewModel
     {
+        public ICommand FlattenX { get; }
+        public ICommand FlattenY { get; }
+        public ICommand FlattenZ { get; }
+
         private double _P0X;
         public double P0X { get => _P0X; set { if (value != _P0X) { _P0X = value; OnPropertyChanged(); } } }
 
@@ -67,6 +72,30 @@ namespace Ramps.ViewModels
             P3Z = 128;
             Height = 384;
             Segments = 5;
+            FlattenX = new RelayCommand(o => FlattenOnX());
+            FlattenY = new RelayCommand(o => FlattenOnY());
+            FlattenZ = new RelayCommand(o => FlattenOnZ());
+        }
+
+        private void FlattenOnX()
+        {
+            P1X = P0X;
+            P2X = P0X;
+            P3X = P0X;
+        }
+
+        private void FlattenOnY()
+        {
+            P1Y = P0Y;
+            P2Y = P0Y;
+            P3Y = P0Y;
+        }
+
+        private void FlattenOnZ()
+        {
+            P1Z = P0Z;
+            P2Z = P0Z;
+            P3Z = P0Z;
         }
     }      
 }           

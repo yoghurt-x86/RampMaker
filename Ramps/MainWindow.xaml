@@ -23,17 +23,17 @@
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
                     <TextBox Text="{Binding BezierPoints.P0X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P0X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0XValue"/>
+                    <Slider Value="{Binding BezierPoints.P0X}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
                     <TextBox Text="{Binding BezierPoints.P0Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P0Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0YValue"/>
+                    <Slider Value="{Binding BezierPoints.P0Y}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
                     <TextBox Text="{Binding BezierPoints.P0Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P0Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0ZValue"/>
+                    <Slider Value="{Binding BezierPoints.P0Z}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p0ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
@@ -41,17 +41,17 @@
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
                     <TextBox Text="{Binding BezierPoints.P1X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P1X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1XValue"/>
+                    <Slider Value="{Binding BezierPoints.P1X}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
                     <TextBox Text="{Binding BezierPoints.P1Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P1Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1YValue"/>
+                    <Slider Value="{Binding BezierPoints.P1Y}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
                     <TextBox Text="{Binding BezierPoints.P1Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P1Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1ZValue"/>
+                    <Slider Value="{Binding BezierPoints.P1Z}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p1ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
@@ -59,17 +59,17 @@
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
                     <TextBox Text="{Binding BezierPoints.P2X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P2X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2XValue"/>
+                    <Slider Value="{Binding BezierPoints.P2X}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
                     <TextBox Text="{Binding BezierPoints.P2Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P2Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2YValue"/>
+                    <Slider Value="{Binding BezierPoints.P2Y}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
                     <TextBox Text="{Binding BezierPoints.P2Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P2Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2ZValue"/>
+                    <Slider Value="{Binding BezierPoints.P2Z}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p2ZValue"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel>
@@ -77,17 +77,17 @@
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">X:</Label>
                     <TextBox Text="{Binding BezierPoints.P3X}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P3X}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3XValue"/>
+                    <Slider Value="{Binding BezierPoints.P3X}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3XValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Y:</Label>
                     <TextBox Text="{Binding BezierPoints.P3Y}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P3Y}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3YValue"/>
+                    <Slider Value="{Binding BezierPoints.P3Y}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3YValue"/>
                 </DockPanel>
                 <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                     <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Z:</Label>
                     <TextBox Text="{Binding BezierPoints.P3Z}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                    <Slider Value="{Binding BezierPoints.P3Z}" Minimum="-2048" Maximum="2048" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3ZValue"/>
+                    <Slider Value="{Binding BezierPoints.P3Z}" Minimum="-4096" Maximum="4096" TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True" Name="p3ZValue"/>
                 </DockPanel>
             </StackPanel>
             <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
@@ -98,8 +98,13 @@
             <DockPanel  VerticalAlignment="Center" Margin="2" Height="20">
                 <Label DockPanel.Dock="Left" FontSize="8" FontWeight="Bold">Height:</Label>
                 <TextBox Text="{Binding BezierPoints.Height}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                <Slider Value="{Binding BezierPoints.Height}" Minimum="1" Maximum="2048" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Height"/>
+                <Slider Value="{Binding BezierPoints.Height}" Minimum="1" Maximum="4096" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="Height"/>
             </DockPanel>
+            <StackPanel  Margin="2" Height="30" Orientation="Horizontal">
+                <Button Width="75" Margin="2" Command="{Binding BezierPoints.FlattenX}">Flatten X</Button>
+                <Button Width="75" Margin="2" Command="{Binding BezierPoints.FlattenY}">Flatten Y</Button>
+                <Button Width="75" Margin="2" Command="{Binding BezierPoints.FlattenZ}">Flatten Z</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
