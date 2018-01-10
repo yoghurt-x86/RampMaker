@@ -22,6 +22,14 @@ namespace Surf.Library
             this.p3 = p3;
         }
 
+        public void Translate(Vector3D vector)
+        {
+            p0 += vector;
+            p1 += vector;
+            p2 += vector;
+            p3 += vector;
+        }
+
         public IEnumerable<Point3D> GetPoints(int segments)
         {
             var points = new Point3D[segments+1];

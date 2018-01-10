@@ -85,7 +85,7 @@ namespace Surf.Library
 
             if (theta.ApproximateEquals(1))
             {
-                throw new NotImplementedException("Ramp is Straight on");
+                throw new ArgumentException("Ramp is Straight on");
             }
             else if (cross.Z.ApproximateEquals(0)) //vertical turn (up/down)
             { 

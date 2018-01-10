@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 
 namespace Ramps.ViewModels
 {
@@ -13,6 +14,7 @@ namespace Ramps.ViewModels
         public ICommand FlattenX { get; }
         public ICommand FlattenY { get; }
         public ICommand FlattenZ { get; }
+        public ICommand FlattenDirectionally { get; }
 
         private double _P0X;
         public double P0X { get => _P0X; set { if (value != _P0X) { _P0X = value; OnPropertyChanged(); } } }
@@ -50,9 +52,6 @@ namespace Ramps.ViewModels
         private double _P3Z;
         public double P3Z { get => _P3Z; set { if (value != _P3Z) { _P3Z = value; OnPropertyChanged(); } } }
 
-        private double _height;
-        public double Height { get => _height; set { if (value != _height) { _height = value; OnPropertyChanged(); } } }
-
         private int _segments;
         public int Segments { get => _segments; set { if (value != _segments) { _segments = value; OnPropertyChanged(); } } }
 
@@ -64,17 +63,25 @@ namespace Ramps.ViewModels
             P1X = 256;
             P1Y = 0;
             P1Z = 0;
-            P2X = 384;
+            P2X = -256;
             P2Y = 0;
-            P2Z = 128;
+            P2Z = 0;
             P3X = 512;
             P3Y = 0;
             P3Z = 128;
-            Height = 384;
             Segments = 5;
             FlattenX = new RelayCommand(o => FlattenOnX());
             FlattenY = new RelayCommand(o => FlattenOnY());
             FlattenZ = new RelayCommand(o => FlattenOnZ());
+        }
+
+        public Bezier3D ToBezier3D()
+        {
+            var p0 = new Point3D(P0X, P0Y, P0Z);
+            var p1 = new Point3D(P0X + P1X, P0Y + P1Y, P0Z + P1Z);
+            var p2 = new Point3D(P3X + P2X, P3Y + P2Y, P3Z + P2Z);
+            var p3 = new Point3D(P3X, P3Y, P3Z);
+            return new Bezier3D(p0, p1, p2, p3);
         }
 
         private void FlattenOnX()
@@ -97,5 +104,7 @@ namespace Ramps.ViewModels
             P2Z = P0Z;
             P3Z = P0Z;
         }
+
+      
     }      
 }           

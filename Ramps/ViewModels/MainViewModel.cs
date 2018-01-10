@@ -12,75 +12,84 @@ using Surf.Library;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Collections.Specialized;
 
 namespace Ramps.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
         private BezierPointsViewModel _bezierPoints;
-        public BezierPointsViewModel BezierPoints {get { return this._bezierPoints; } set { if (value != _bezierPoints) { _bezierPoints = value; OnPropertyChanged(); } } }
+        public  BezierPointsViewModel CurrentBezierPoints {get { return this._bezierPoints; } set { if (value != _bezierPoints) { _bezierPoints = value; OnPropertyChanged(); } } }
 
-        private Model3DGroup _currentRamp;
-        public Model3DGroup CurrentRamp { get { return this._currentRamp; } set { if (value != _currentRamp) { _currentRamp = value; OnPropertyChanged(); } } }
+        private ObservableCollection<BezierPointsViewModel> _BezierList;
+        public  ObservableCollection<BezierPointsViewModel> BezierList { get => _BezierList; set { if (value != _BezierList) { _BezierList = value; OnPropertyChanged(); } } }
 
+        private double _height;
+        public  double Height { get => _height; set { if (value != _height) { _height = value; OnPropertyChanged(); } } }
 
+        public ICommand AddSegment { get; }
+        public ICommand RemoveSegment { get; }
 
         public Model3DGroup Ramps { get; private set; }
 
-        public MainViewModel()
+        public MainViewModel() : base()
         {
-            BezierPoints = new BezierPointsViewModel();
-            BezierPoints.PropertyChanged += UpdatecurrentRamp;
+            Height = 384;
             Ramps = new Model3DGroup();
-            CurrentRamp = new Model3DGroup();
-            UpdatecurrentRamp(null, null);
+            CurrentBezierPoints = new BezierPointsViewModel();
+            BezierList = new ObservableCollection<BezierPointsViewModel> { CurrentBezierPoints };
+            BezierList.CollectionChanged += OnPropertyChanged;
+            AddSegment    = new RelayCommand(o => AddSegmentCommand());
+            RemoveSegment = new RelayCommand(o => RemoveSegmentCommand());
+            CurrentBezierPoints.PropertyChanged += UpdateRamps;
+                           this.PropertyChanged += UpdateRamps;
+            OnPropertyChanged();
         }
 
-        private void UpdatecurrentRamp(object sender, PropertyChangedEventArgs e)
+        private void UpdateRamps(object sender, PropertyChangedEventArgs e)
         {
-            try { 
-                var p0 = new Point3D(BezierPoints.P0X, BezierPoints.P0Y, BezierPoints.P0Z);
-                var p1 = new Point3D(BezierPoints.P1X, BezierPoints.P1Y, BezierPoints.P1Z);
-                var p2 = new Point3D(BezierPoints.P2X, BezierPoints.P2Y, BezierPoints.P2Z);
-                var p3 = new Point3D(BezierPoints.P3X, BezierPoints.P3Y, BezierPoints.P3Z);
-                var Bezier = new Bezier3D(p0, p1, p2, p3);
+            var bezier3DList = new List<Bezier3D>();
+            var surfRamps =    new List<SurfRamp>();
 
-                CurrentRamp.Children.Clear();
-                var points = Bezier.GetPoints(BezierPoints.Segments).ToArray();
-                SurfSegment[] ramps = new SurfSegment[points.Length - 1];
-                for (int i = 1; i < points.Length; i++)
-                {
-                    ramps[i - 1] = new SurfSegment(points[i - 1], points[i], BezierPoints.Height);
-                }
-                for (int i = 0; i < ramps.Length - 1; i++)
-                {
-                    ramps[i].LinkTo(ramps[i + 1]);
-                    CurrentRamp.Children.Add(new GeometryModel3D { Geometry = ramps[i].Model, Material = new DiffuseMaterial { Brush = Brushes.PowderBlue } });
-                }
-                CurrentRamp.Children.Add(new GeometryModel3D { Geometry = ramps[ramps.Length - 1].Model, Material = new DiffuseMaterial { Brush = Brushes.PowderBlue } });
-            }
-            catch (Exception)
+            Vector3D translateVector = new Vector3D(0,0,0);
+            for (int i = 0; i < BezierList.Count; i++)
             {
-                return;
+                var bezier = BezierList[i].ToBezier3D();
+                bezier.Translate(translateVector);
+
+                translateVector.X += BezierList[i].P3X;
+                translateVector.Y += BezierList[i].P3Y;
+                translateVector.Z += BezierList[i].P3Z;
+
+                var ramp = new SurfRamp(bezier, BezierList[i].Segments, Height);
+                if (BezierList[i].Equals(CurrentBezierPoints)) ramp.Material = new DiffuseMaterial { Brush = Brushes.MediumVioletRed };
+                surfRamps.Add(ramp);
             }
+
+            
+            var ModelCollection = new Model3DCollection();
+            for (int i = 1; i < surfRamps.Count; i++)
+            {
+                try { surfRamps[i - 1].LinkTo(surfRamps[i]); } catch (ArgumentException) {  }
+                ModelCollection.Add(new Model3DGroup { Children = surfRamps[i - 1].GetModel3D() });
+            }
+            ModelCollection.Add(new Model3DGroup { Children = surfRamps.Last().GetModel3D() });
+            Ramps.Children = ModelCollection;
         }
-        
-
-        private void AddCurvedBezier(Bezier3D bezier, int segments, double Height)
+        private void AddSegmentCommand()
         {
-            var points = bezier.GetPoints(segments).ToArray();
-            SurfSegment[] ramps = new SurfSegment[points.Length - 1];
-            for (int i = 1; i < points.Length; i++)
-            {
-                ramps[i - 1] = new SurfSegment(points[i - 1], points[i], Height);
-            }
-            for (int i = 0; i < ramps.Length - 1; i++)
-            {
-                ramps[i].LinkTo(ramps[i + 1]);
-                Ramps.Children.Add(new GeometryModel3D { Geometry = ramps[i].Model, Material = new DiffuseMaterial { Brush = Brushes.Gray } });
-            }
-            Ramps.Children.Add(new GeometryModel3D { Geometry = ramps[ramps.Length - 1].Model, Material = new DiffuseMaterial { Brush = Brushes.Gray } });
+            var bezier = new BezierPointsViewModel();
+            bezier.PropertyChanged += UpdateRamps;
+            BezierList.Add(bezier);
+            CurrentBezierPoints = bezier;
+        }
 
+        private void RemoveSegmentCommand()
+        {
+            BezierList.Remove(CurrentBezierPoints);
+            CurrentBezierPoints = BezierList.First();
         }
     }
 }
